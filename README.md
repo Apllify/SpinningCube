@@ -15,3 +15,5 @@ for any given line, its entire length will be rendered at the exact same draw de
 The "application" has very elementary controls for debugging purposes : 
 - Escape : Quit the application.  
 - Space : Pause/Unpause the rotation of the cube.
+- Left Arrow : Decrease the rotation speed (cannot be negative).
+- Right Arrow : Increase the rotation speed.
