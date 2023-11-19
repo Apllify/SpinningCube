@@ -36,7 +36,8 @@ namespace SpinningCube
 		KeyboardState lastKeyboard, curKeyboard;
 
 
-
+		//UI
+		SpriteFont mainFont;
 
 
 		public SpinningCube()
@@ -123,7 +124,7 @@ namespace SpinningCube
 		{
 			_spriteBatch = new SpriteBatch(GraphicsDevice);
 
-			// TODO: use this.Content to load your game content here
+			mainFont = Content.Load < SpriteFont> ("MainFont");
 		}
 
 		protected override void Update(GameTime gameTime)
@@ -144,7 +145,7 @@ namespace SpinningCube
 			}
 			else if (curKeyboard.IsKeyDown(Keys.Left))
 			{
-				rotSpeed -= MathF.Max(rotIncrement * gameTime.GetElapsedSeconds(), 0f);
+				rotSpeed = MathF.Max(rotSpeed - rotIncrement * gameTime.GetElapsedSeconds(), 0f);
 			}
 
 			//update rotation quaternion
@@ -201,6 +202,9 @@ namespace SpinningCube
 
 			}
 
+
+			//draw the speed counter
+			_spriteBatch.DrawString(mainFont, rotSpeed.ToString("F2"), new(10, 365), Color.Black); 
 
 
 			_spriteBatch.End();

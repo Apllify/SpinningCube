@@ -25,3 +25,4 @@ D:\Programmation\MonoGame\SpinningCube\obj\Debug\net6.0\refint\SpinningCube.dll
 D:\Programmation\MonoGame\SpinningCube\obj\Debug\net6.0\SpinningCube.pdb
 D:\Programmation\MonoGame\SpinningCube\obj\Debug\net6.0\SpinningCube.genruntimeconfig.cache
 D:\Programmation\MonoGame\SpinningCube\obj\Debug\net6.0\ref\SpinningCube.dll
+D:\Programmation\MonoGame\SpinningCube\bin\Debug\net6.0\Content\MainFont.xnb
