@@ -27,7 +27,11 @@ namespace SpinningCube
 		//rotation information
 		Quaternion rotation;
 
-		Vector3 rotAxis = new Vector3(topLeftX, topLeftY, 0);
+		Vector3 rotAxisStart = new Vector3(0, 0, 0);
+		Vector3 rotAxisEnd = new Vector3(topLeftX, topLeftY, 0);
+		Vector3 rotAxis;
+		Color axisColor = new Color(40, 40, 40, 60);
+
 		float rotSpeed = 0.5f;
 		const float rotIncrement = 0.3f;
 		bool rotationActive = true;
@@ -67,6 +71,7 @@ namespace SpinningCube
 			};
 
 			//instantiate our rotation
+			rotAxis = rotAxisEnd - rotAxisStart;
 			rotAxis.Normalize();
 			rotation = Quaternion.CreateFromAxisAngle(rotAxis, rotSpeed);
 
@@ -113,11 +118,26 @@ namespace SpinningCube
 			return MathF.Max(LayerDepth(ref p1), LayerDepth(ref p2));
 		}
 
+		private float LayerDepth( Vector3 p1,  Vector3 p2)
+		{
+			return MathF.Max(LayerDepth(ref p1), LayerDepth(ref p2));
+		}
+
 		private void DrawLine3D(SpriteBatch spriteBatch, Color color, ref Vector3 p1, ref Vector3 p2)
 		{
 			_spriteBatch.DrawLine(Flat(p1), Flat(p2),
 					  color, 4,
 					  LayerDepth(ref p1, ref p2));
+		}
+
+		private void DrawLine3D(SpriteBatch spriteBatch, Color color, ref Vector3 p1, Vector3 p2)
+		{
+			DrawLine3D(spriteBatch, color, ref p1, ref p2);
+		}
+
+		private void DrawLine3D(SpriteBatch spriteBatch, Color color, Vector3 p1, Vector3 p2)
+		{
+			DrawLine3D(spriteBatch, color, ref p1, ref p2);
 		}
 
 		protected override void LoadContent()
@@ -182,16 +202,20 @@ namespace SpinningCube
 			for (int i = 0; i < n; i++)
 			{
 				DrawLine3D(_spriteBatch, Color.Blue, ref backSquare[i], ref backSquare[(i + 1) % n]);
-
 			}
+			DrawLine3D(_spriteBatch, Color.Blue, ref backSquare[0], ref backSquare[2]);
+			DrawLine3D(_spriteBatch, Color.Blue, ref backSquare[1], ref backSquare[3]);
 
 
 			//draw the square connections
 			for (int i = 0; i<n; i++)
 			{
-				DrawLine3D(_spriteBatch, Color.Green, ref backSquare[i], ref frontSquare[i ]);
+				DrawLine3D(_spriteBatch, Color.Green, ref backSquare[i], ref frontSquare[i]);
 
+				//DrawLine3D(_spriteBatch, Color.Green, ref frontSquare[i], ref backSquare[(i+1) % n]);
+				//DrawLine3D(_spriteBatch, Color.Green, ref backSquare[i], ref frontSquare[(i+1) % n]);
 			}
+
 
 
 			// draw the foreground square
@@ -199,13 +223,15 @@ namespace SpinningCube
 			for (int i = 0; i < m; i++)
 			{
 				DrawLine3D(_spriteBatch, Color.Red, ref frontSquare[i], ref frontSquare[(i + 1) % n]);
-
 			}
+			DrawLine3D(_spriteBatch, Color.Red, ref frontSquare[0], ref frontSquare[2]);
+			DrawLine3D(_spriteBatch, Color.Red, ref frontSquare[1], ref frontSquare[3]);
 
+			//draw the rotation axis
+			DrawLine3D(_spriteBatch, axisColor, ref rotAxisStart, rotAxisStart + (1000 * rotAxis));
 
 			//draw the speed counter
 			_spriteBatch.DrawString(mainFont, rotSpeed.ToString("F2"), new(10, 365), Color.Black); 
-
 
 			_spriteBatch.End();
 			base.Draw(gameTime);
