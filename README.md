@@ -1,6 +1,8 @@
 ﻿# Spinning Cube
 
-![](preview.png)
+<p align="center">
+  <img src="preview.png" />
+</p>
 
 This is a very basic 3D simulation that I made as part of a programming challenge.  
   
