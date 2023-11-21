@@ -1,5 +1,7 @@
 ﻿# Spinning Cube
 
+![](preview.png)
+
 This is a very basic 3D simulation that I made as part of a programming challenge.  
   
 The hardest part was determining draw depth for the lines between points. 

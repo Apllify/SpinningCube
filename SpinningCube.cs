@@ -231,7 +231,7 @@ namespace SpinningCube
 			DrawLine3D(_spriteBatch, axisColor, ref rotAxisStart, rotAxisStart + (1000 * rotAxis));
 
 			//draw the speed counter
-			_spriteBatch.DrawString(mainFont, rotSpeed.ToString("F2"), new(10, 365), Color.Black); 
+			_spriteBatch.DrawString(mainFont, $"Rotation Speed : {rotSpeed : 0.00}", new(10, 365), Color.Black); 
 
 			_spriteBatch.End();
 			base.Draw(gameTime);
